@@ -1,0 +1,39 @@
+<!Doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Flaskr</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="flaskr">
+<div class="page">
+  <h1>Leo's Blog</h1>
+  <div class=metanav>
+  <ul class="navbar">
+    <li><a href="{{ url_for('show_entries') }}">首页</a> / </li>
+    <li><a href="#">技术</a> / </li>
+    <li><a href="#">随笔</a> / </li>
+    <li><a href="#">关于作者</a></li>
+  </ul>
+  {% if not session.logged_in %}
+    <!-- <a href="{{ url_for('login') }}">log in</a> -->
+  {% else %}
+    <a href="{{ url_for('logout') }}">登出</a> / <a href="{{ url_for('show_admin') }}">管理</a>
+  {% endif %}
+</div>
+
+  <img src="/static/img/background.jpg" alt="background" style="width: 100%;">
+  
+  {% for message in get_flashed_messages() %}
+    <div class=flash>{{ message }}</div>
+  {% endfor %}
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+  {% block body %}{% endblock %}
+  <p class="footer">
+  本博客由Leo基于<a href="http://flask.pocoo.org/">Flask</a>框架开发 
+      © Copyright 2015 by Leo
+  </p>
+</div>
+</body>
+</html>

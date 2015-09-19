@@ -1,0 +1,13 @@
+{% extends "basicLayout.html" %}
+{% block body %}
+  <h2>Join Now</h2>
+  <form action="{{ url_for('register') }}" method=post>
+    <dl>
+      <dt>Username:
+      <dd><input type=text name=username>
+      <dt>Password:
+      <dd><input type=password name=password>
+      <dd><input type=submit value=Register>
+    </dl>
+  </form>
+{% endblock %}

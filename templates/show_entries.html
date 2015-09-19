@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block body %}
+
+
+  <ul class=entries>
+  {% for entry in entries %}
+    <li>
+    <h2><a href="/article?id={{entry.id}}" style="text-decoration: none;">{{ entry.title }}</a></h2>
+    <p class="excerpt">{{ entry.text|safe }}</p>
+    </li>
+  {% else %}
+    <li><em>Unbelievable.  No entries here so far</em></li>
+  {% endfor %}
+  </ul>
+  
+ <table>
+ <tr>
+  <td>
+  <a href="/?page=0" style="margin-left: 5px">首页</a>
+  {% if pagetotal[0] - 5 < 0 %}
+    <a href="#" style="margin-left: 5px">上一页</a>
+  {% else %}
+    <a href="/?page={{pagetotal[0]-5}}" style="margin-left: 5px">上一页</a>
+  {%  endif %}
+
+  {% for index in pages %}
+    {% if index*5 == pagetotal[0] %}
+      <a href="/?page={{ index*5 }}" style="color: red; margin-left: 5px">{{index+1}}</a>
+    {% else %}
+      <a href="/?page={{ index*5 }}" style="margin-left: 5px">{{index+1}}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if pagetotal[0] + 5 > pagetotal[2] %}
+    <a href="#" style="margin-left: 5px" style="margin-left: 5px">下一页</a>
+  {% else %}
+    <a href="/?page={{pagetotal[0]+5}}" style="margin-left: 5px">下一页</a>
+  {% endif %}
+
+  <a href="/?page={{pagetotal[1]}}" style="margin-left: 5px">尾页</a>
+  </td>
+  <td>
+  <form action="{{ url_for('show_entries') }}" method=post>
+  <input type=text name=pagenumber style="width: 50px; margin-left: 5px">
+  <input type=submit value=跳转>
+  </form>
+  </td>
+</tr>
+</table>
+
+  
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "admin_layout.html" %}
+{% block body %}
+
+{% if session.logged_in %}
+<form action="{{ url_for('edit') }}?id={{ article.id }}" method=post name="editForm">
+	<div class="articleEdit">
+		<div id="articleEdit-title">标题：<input type="text" name="title"></div>
+		<textarea name=text rows=40 id="addEditor" class="ckeditor">{{ article.text|safe }}</textarea>
+	</div>
+	<input type=submit value=Edit id="EditBtn">
+</form>
+{% endif %}
+<script type="text/javascript">
+	window.onload = function fill() {
+		this.document.editForm.title.value = "{{ article.title }}";
+		CKEDITOR.replace('addEditor');
+	};	
+</script>
+{% endblock %}
