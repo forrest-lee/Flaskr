@@ -1,26 +1,27 @@
 {% extends "basicLayout.html" %}
 {% block body %}
   
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+
   <div class="loginDiv">
   <h2 style="text-align:center;">Login</h2>
   <form action="{{ url_for('login') }}" method=post>
     <table>
       <tr>
-        <!-- <td>Username:</td> -->
+        <td>Username:</td>
         <td><input type=text name=username></td>
       </tr>
       <tr>
-        <!-- <td>Password:</td> -->
+        <td>Password:</td>
         <td><input type=password name=password></td>
       </tr>
       <tr>
-        <td colspan="2"><input type=submit value=Login></td>
+        <td colspan="2"><input type=submit value=Login style="width: 50%"></td>
       </tr>
       <tr>
-        <!-- <td colspan="2"><a href="{{ url_for('register') }}">Sign Up</a></td> -->
+        <td colspan="2"><a href="{{ url_for('register') }}">Sign Up</a></td>
       </tr>
     </table>
   </form>
   </div>
-
 {% endblock %}

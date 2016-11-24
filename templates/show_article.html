@@ -1,11 +1,35 @@
-{% extends "basicLayout.html" %}
-{% block body %}
-
+<!Doctype html>
+<html>
+<head>
+<title>Flaskr</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class=page>
+  <h1>Flaskr: Leo's Blog</h1>
+  <div class=metanav>
+  <ul class="navbar">
+    <li><a href="{{ url_for('show_entries') }}">首页</a> / </li>
+    <li><a href="#">技术</a> / </li>
+    <li><a href="#">随笔</a> / </li>
+    <li><a href="#">关于作者</a></li>
+  </ul>
+  {% if not session.logged_in %}
+    <a href="{{ url_for('login') }}">log in</a>
+  {% else %}
+    <a href="{{ url_for('logout') }}">log out</a>
+  {% endif %}
+  </div>
+  
+  {% for message in get_flashed_messages() %}
+    <div class=flash>{{ message }}</div>
+  {% endfor %}
+  
 	<div class="article">
 		<h2>{{ article.title }}</h2>
 		<p>{{ article.text|safe }}</p>
 	</div>
-
-{% endblock %}
+</div>
+</body>
 
  

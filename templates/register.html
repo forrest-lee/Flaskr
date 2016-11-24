@@ -1,6 +1,7 @@
 {% extends "basicLayout.html" %}
 {% block body %}
   <h2>Join Now</h2>
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
   <form action="{{ url_for('register') }}" method=post>
     <dl>
       <dt>Username:
